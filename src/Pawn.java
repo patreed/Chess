@@ -43,8 +43,6 @@ public class Pawn extends Piece
 		}
 		else if (this.white == false)
 		{
-			if (yfirst - ynext == -2 && yfirst == 2)
-				return true;
 			if (yfirst - ynext == -1 && Math.abs(xfirst - xnext) == 0)
 			{
 				if (Chess.position[xnext][ynext] == null)
@@ -52,13 +50,11 @@ public class Pawn extends Piece
 				else
 					return false;
 			}
-			else if (yfirst - ynext == -1 && Math.abs(xfirst - xnext) == 1)
+			if (Chess.position[xnext][ynext] != null)
 			{
-				if (Chess.position[xnext][ynext].white != this.white)
+				if (ynext - yfirst == 1 && (Math.abs(xfirst - xnext) == 1) && Chess.position[xnext][ynext].white)
 					return true;
-				else
-					return false;
-			}	
+			}
 			else
 				return false;
 		}

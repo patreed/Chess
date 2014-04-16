@@ -22,6 +22,7 @@ public class Chess extends JComponent
 		placePieces();
 		turn = true;
 		
+		
 		BoardComponent bc = new BoardComponent();
 		BoardMouseListener bml = new BoardMouseListener(this);
 		bc.addMouseListener(bml);
@@ -79,11 +80,41 @@ public class Chess extends JComponent
 			}
 		}
 	}
+
+	public static void playAI()
+	{
+		
+		while(turn == false)
+		{
+			Random generator = new Random();
+			int randxfirst = generator.nextInt(8) + 1;
+			int randyfirst = generator.nextInt(8) + 1;
+		
+			if (position[randxfirst][randyfirst] != null)
+			{
+				if (!position[randxfirst][randyfirst].white)
+					{
+						int randendx = generator.nextInt(8) + 1;
+						int randendy = generator.nextInt(8) + 1;
+						if (position[randxfirst][randyfirst].canMove(randxfirst, randyfirst, randendx, randendy) && position[randxfirst][randyfirst].notBlocked(randxfirst, randyfirst, randendx, randendy))
+						{
+							Piece intermediate = position[randxfirst][randyfirst];
+							position[randxfirst][randyfirst] = null;
+							position[randendx][randendy] = intermediate;
+							turn = true;
+						}
+					}
+					
+			}
+			
+		}
+			
+	}
 	
 	public static void main(String[] args) 
 	{
+	
 		new Chess();
-
 
 	}
 
